@@ -1,613 +1,282 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ndakarou Jersey – Maillots de Football Authentiques</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            condensed: ['"Barlow Condensed"', 'sans-serif'],
+            body: ['Barlow', 'sans-serif'],
+          },
+          colors: {
+            red: {
+              DEFAULT: '#D0021B',
+              dark: '#8B0000',
+              light: '#FF1A30',
+            },
+            dark: {
+              DEFAULT: '#181818',
+              card: '#1E1E1E',
+              border: '#2A2A2A',
+              bg: '#0D0D0D',
+            }
+          },
+          animation: {
+            ticker: 'ticker 22s linear infinite',
+          },
+          keyframes: {
+            ticker: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --red: #D0021B;
-      --red-dark: #8B0000;
-      --red-light: #FF1A30;
-      --black: #0D0D0D;
-      --dark: #181818;
-      --card: #1E1E1E;
-      --border: #2A2A2A;
-      --text: #F0F0F0;
-      --muted: #888;
-      --white: #fff;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--black);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,13,13,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2rem;
-      height: 64px;
-    }
-
-    .logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 1.6rem;
-      letter-spacing: 1px;
-      color: var(--white);
-    }
-    .logo span { color: var(--red); }
-
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--white); }
-
-    .nav-cta {
-      background: var(--red);
-      color: var(--white) !important;
-      padding: 0.45rem 1.1rem;
-      border-radius: 4px;
-      font-weight: 600 !important;
-    }
-    .nav-cta:hover { background: var(--red-light); color: var(--white) !important; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 88vh;
-      display: flex;
-      align-items: center;
-      padding: 4rem 2rem;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 40px,
-          rgba(208,2,27,0.03) 40px,
-          rgba(208,2,27,0.03) 80px
-        ),
-        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(139,0,0,0.25) 0%, transparent 70%),
-        var(--black);
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: rgba(208,2,27,0.15);
-      border: 1px solid rgba(208,2,27,0.4);
-      color: var(--red-light);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-content { position: relative; max-width: 650px; }
-
-    .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(3.5rem, 9vw, 7rem);
-      line-height: 0.92;
-      letter-spacing: -1px;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--red);
-      -webkit-text-stroke: 0px;
-    }
-    .hero h1 .outline {
-      -webkit-text-stroke: 2px var(--white);
+    body { font-family: 'Barlow', sans-serif; }
+    .font-condensed { font-family: 'Barlow Condensed', sans-serif; }
+    .text-outline {
+      -webkit-text-stroke: 2px #fff;
       color: transparent;
     }
-
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
+    .hero-pattern {
+      background:
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(208,2,27,0.03) 40px, rgba(208,2,27,0.03) 80px),
+        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(139,0,0,0.25) 0%, transparent 70%),
+        #0D0D0D;
     }
-
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--red);
-      color: var(--white);
-      padding: 0.85rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
-
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.85rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .btn-outline:hover { border-color: var(--muted); transform: translateY(-2px); }
-
-    .hero-stats {
-      position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      text-align: right;
-    }
-    .stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1;
-    }
-    .stat-num span { color: var(--red); }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    /* ── SECTION COMMONS ── */
-    section { padding: 5rem 2rem; }
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--red);
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    .section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 3rem;
-    }
-    .section-title span { color: var(--red); }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-      margin: 0 2rem;
-    }
-
-    /* ── PRODUCTS ── */
-    #catalogue { background: var(--dark); }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .product-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
-      cursor: pointer;
-    }
-    .product-card:hover { transform: translateY(-6px); border-color: var(--red); }
-
-    .product-img {
-      background: #252525;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-      position: relative;
-    }
-
-    .badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: var(--red);
-      color: var(--white);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 0.2rem 0.55rem;
-      border-radius: 2px;
-    }
-    .badge.new { background: #0A7A2E; }
-
-    .product-info { padding: 1rem 1.1rem 1.3rem; }
-    .product-league {
-      font-size: 0.68rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 0.3rem;
-    }
-    .product-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
-    .product-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .product-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-    .product-price sub { font-size: 0.75rem; font-weight: 400; color: var(--muted); font-family: 'Barlow', sans-serif; }
-
-    .btn-order {
-      background: transparent;
-      border: 1px solid var(--red);
-      color: var(--red);
-      padding: 0.4rem 0.9rem;
-      border-radius: 3px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-order:hover { background: var(--red); color: var(--white); }
-
-    /* ── BRANDS TICKER ── */
-    .ticker-wrap {
-      overflow: hidden;
-      background: var(--black);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 0;
-    }
-    .ticker {
-      display: flex;
-      gap: 3rem;
-      animation: ticker 18s linear infinite;
-      white-space: nowrap;
-    }
-    .ticker span {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--muted);
-    }
-    .ticker span.accent { color: var(--red); }
+    .ticker-track { display: flex; gap: 3rem; animation: ticker 22s linear infinite; white-space: nowrap; }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    /* ── WHY ── */
-    #pourquoi { background: var(--black); }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-    .why-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.8rem;
-      transition: border-color 0.2s;
-    }
-    .why-card:hover { border-color: rgba(208,2,27,0.5); }
-    .why-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(208,2,27,0.1);
-      border: 1px solid rgba(208,2,27,0.2);
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .why-card h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.6rem;
-    }
-    .why-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--dark); }
-    .contact-box {
-      max-width: 680px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .contact-box p { color: var(--muted); margin-bottom: 2.5rem; line-height: 1.7; }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .contact-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.4rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.7rem;
-    }
-    .contact-item:hover { border-color: var(--red); transform: translateY(-3px); }
-    .contact-item .ci-icon { font-size: 1.8rem; }
-    .contact-item .ci-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-    .contact-item .ci-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    footer p { font-size: 0.8rem; color: var(--muted); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
-      .hero-stats { display: none; }
-      nav .nav-links { display: none; }
-      .hero { padding: 3rem 1.2rem; }
-      section { padding: 3.5rem 1.2rem; }
-      footer { flex-direction: column; text-align: center; }
-    }
   </style>
 </head>
-<body>
+<body class="bg-dark-bg text-gray-100 min-h-screen">
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo">Ndakarou<span>.</span>Jersey</div>
-    <div class="nav-links">
-      <a href="#catalogue">Catalogue</a>
-      <a href="#pourquoi">Pourquoi nous</a>
-      <a href="#contact" class="nav-cta">Commander</a>
+  <!-- ── NAV ── -->
+  <nav class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-md border-b border-dark-border flex items-center justify-between px-8 h-16">
+    <div class="font-condensed font-black text-2xl tracking-wide text-white">
+      Ndakarou<span class="text-red">.</span>Jersey
+    </div>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#catalogue" class="text-gray-500 hover:text-white text-sm font-medium uppercase tracking-wider transition-colors">Catalogue</a>
+      <a href="#pourquoi" class="text-gray-500 hover:text-white text-sm font-medium uppercase tracking-wider transition-colors">Pourquoi nous</a>
+      <a href="#contact" class="bg-red hover:bg-red-light text-white px-4 py-2 rounded text-sm font-semibold uppercase tracking-wider transition-colors">Commander</a>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-content">
-      <div class="hero-badge">⚽ Dakar · Livraison rapide</div>
-      <h1>
+  <!-- ── HERO ── -->
+  <section class="hero-pattern relative overflow-hidden min-h-[88vh] flex items-center px-8 py-16">
+    <div class="relative max-w-2xl">
+      <div class="inline-block bg-red/10 border border-red/40 text-red-light text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-sm mb-6">
+        ⚽ Dakar · Livraison rapide
+      </div>
+      <h1 class="font-condensed font-black uppercase leading-none tracking-tight mb-6" style="font-size: clamp(3.5rem, 9vw, 7rem);">
         Maillots<br/>
-        <em>Officiels</em><br/>
-        <span class="outline">& Replicas</span>
+        <span class="text-red">Officiels</span><br/>
+        <span class="text-outline">& Replicas</span>
       </h1>
-      <p>Les plus grands clubs du monde, les équipes nationales — disponibles à Dakar. Qualité premium, prix accessibles.</p>
-      <div class="hero-actions">
-        <a href="#catalogue" class="btn-primary">Voir le catalogue &rarr;</a>
-        <a href="#contact" class="btn-outline">Nous contacter</a>
+      <p class="text-gray-500 text-lg max-w-md leading-relaxed mb-10">
+        Les plus grands clubs du monde, les équipes nationales — disponibles à Dakar. Qualité premium, prix accessibles.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#catalogue" class="inline-flex items-center gap-2 bg-red hover:bg-red-light text-white px-8 py-3 rounded font-semibold tracking-wide transition-all hover:-translate-y-0.5">
+          Voir le catalogue →
+        </a>
+        <a href="#contact" class="inline-flex items-center gap-2 border border-dark-border hover:border-gray-600 text-gray-100 px-8 py-3 rounded font-medium tracking-wide transition-all hover:-translate-y-0.5">
+          Nous contacter
+        </a>
       </div>
     </div>
-    <div class="hero-stats">
+
+    <!-- Stats -->
+    <div class="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8 text-right">
       <div>
-        <div class="stat-num">50<span>+</span></div>
-        <div class="stat-label">Clubs disponibles</div>
+        <div class="font-condensed font-black text-5xl text-white leading-none">50<span class="text-red">+</span></div>
+        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Clubs disponibles</div>
       </div>
       <div>
-        <div class="stat-num">24<span>h</span></div>
-        <div class="stat-label">Livraison Dakar</div>
+        <div class="font-condensed font-black text-5xl text-white leading-none">24<span class="text-red">h</span></div>
+        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Livraison Dakar</div>
       </div>
       <div>
-        <div class="stat-num">100<span>%</span></div>
-        <div class="stat-label">Satisfait ou remboursé</div>
+        <div class="font-condensed font-black text-5xl text-white leading-none">100<span class="text-red">%</span></div>
+        <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Satisfait ou remboursé</div>
       </div>
     </div>
   </section>
 
-  <!-- TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>Real Madrid</span><span class="accent">✦</span>
-      <span>PSG</span><span class="accent">✦</span>
-      <span>Équipe du Sénégal</span><span class="accent">✦</span>
-      <span>Manchester City</span><span class="accent">✦</span>
-      <span>Barcelona</span><span class="accent">✦</span>
-      <span>Liverpool</span><span class="accent">✦</span>
-      <span>Bayern Munich</span><span class="accent">✦</span>
-      <span>Inter Milan</span><span class="accent">✦</span>
-      <span>Arsenal</span><span class="accent">✦</span>
-      <span>Équipe du Sénégal</span><span class="accent">✦</span>
-      <!-- duplicate for seamless loop -->
-      <span>Real Madrid</span><span class="accent">✦</span>
-      <span>PSG</span><span class="accent">✦</span>
-      <span>Équipe du Sénégal</span><span class="accent">✦</span>
-      <span>Manchester City</span><span class="accent">✦</span>
-      <span>Barcelona</span><span class="accent">✦</span>
-      <span>Liverpool</span><span class="accent">✦</span>
-      <span>Bayern Munich</span><span class="accent">✦</span>
-      <span>Inter Milan</span><span class="accent">✦</span>
-      <span>Arsenal</span><span class="accent">✦</span>
-      <span>Équipe du Sénégal</span><span class="accent">✦</span>
+  <!-- ── TICKER ── -->
+  <div class="overflow-hidden bg-dark-bg border-y border-dark-border py-4">
+    <div class="ticker-track">
+      <!-- 1st pass -->
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Real Madrid</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">PSG</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Équipe du Sénégal</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Manchester City</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Barcelona</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Liverpool</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Bayern Munich</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Inter Milan</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Arsenal</span>
+      <span class="text-red font-bold">✦</span>
+      <!-- 2nd pass (seamless loop) -->
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Real Madrid</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">PSG</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Équipe du Sénégal</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Manchester City</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Barcelona</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Liverpool</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Bayern Munich</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Inter Milan</span>
+      <span class="text-red font-bold">✦</span>
+      <span class="font-condensed font-semibold uppercase tracking-widest text-gray-500">Arsenal</span>
+      <span class="text-red font-bold">✦</span>
     </div>
   </div>
 
-  <!-- CATALOGUE -->
-  <section id="catalogue">
-    <div class="section-label">Notre sélection</div>
-    <div class="section-title">Catalogue <span>2024/25</span></div>
-    <div class="products-grid">
+  <!-- ── CATALOGUE ── -->
+  <section id="catalogue" class="bg-dark px-8 py-20">
+    <div class="text-xs font-semibold text-red uppercase tracking-widest mb-2">Notre sélection</div>
+    <h2 class="font-condensed font-black text-5xl uppercase leading-none mb-12">
+      Catalogue <span class="text-red">2024/25</span>
+    </h2>
 
-      <div class="product-card">
-        <div class="product-img">
-          🦁<span class="badge new">Nouveau</span>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Sénégal -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer group">
+        <div class="relative bg-[#252525] h-56 flex items-center justify-center overflow-hidden">
+          <img src="https://www.pressafrik.com/photo/art/grande/95484029-66767961.jpg?v=1774015945" alt="Maillot Sénégal" class="h-full w-full object-cover"/>
+          <span class="absolute top-2 left-2 bg-green-700 text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm">Nouveau</span>
         </div>
-        <div class="product-info">
-          <div class="product-league">Équipe nationale</div>
-          <div class="product-name">Sénégal – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">15 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Sénégal Domicile')">Ordre</button>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Équipe nationale</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Sénégal – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">15 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Sénégal Domicile')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">
-          🔵<span class="badge">Top vente</span>
+      <!-- PSG -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="relative bg-[#252525] h-56 flex items-center justify-center text-8xl">
+          🔵
+          <span class="absolute top-2 left-2 bg-red text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm">Top vente</span>
         </div>
-        <div class="product-info">
-          <div class="product-league">Ligue 1 – France</div>
-          <div class="product-name">PSG – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('PSG Domicile')">Ordre</button>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Ligue 1 – France</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">PSG – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('PSG Domicile')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">⚪</div>
-        <div class="product-info">
-          <div class="product-league">La Liga – Espagne</div>
-          <div class="product-name">Real Madrid – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Real Madrid Domicile')">Ordre</button>
+      <!-- Real Madrid -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="bg-[#252525] h-56 flex items-center justify-center text-8xl">⚪</div>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">La Liga – Espagne</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Real Madrid – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Real Madrid Domicile')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">
-          🔴<span class="badge">Top vente</span>
+      <!-- Man United -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="relative bg-[#252525] h-56 flex items-center justify-center text-8xl">
+          🔴
+          <span class="absolute top-2 left-2 bg-red text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm">Top vente</span>
         </div>
-        <div class="product-info">
-          <div class="product-league">Premier League – Angleterre</div>
-          <div class="product-name">Manchester United</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Manchester United')">Ordre</button>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Premier League – Angleterre</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Manchester United</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Manchester United')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">🔵</div>
-        <div class="product-info">
-          <div class="product-league">La Liga – Espagne</div>
-          <div class="product-name">FC Barcelone – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('FC Barcelone')">Ordre</button>
+      <!-- Barcelona -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="bg-[#252525] h-56 flex items-center justify-center text-8xl">🔵</div>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">La Liga – Espagne</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">FC Barcelone – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('FC Barcelone')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">🔴</div>
-        <div class="product-info">
-          <div class="product-league">Premier League – Angleterre</div>
-          <div class="product-name">Liverpool – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Liverpool')">Ordre</button>
+      <!-- Liverpool -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="bg-[#252525] h-56 flex items-center justify-center text-8xl">🔴</div>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Premier League – Angleterre</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Liverpool – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Liverpool')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">🔴</div>
-        <div class="product-info">
-          <div class="product-league">Bundesliga – Allemagne</div>
-          <div class="product-name">Bayern Munich – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Bayern Munich')">Ordre</button>
+      <!-- Bayern -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="bg-[#252525] h-56 flex items-center justify-center text-8xl">🔴</div>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Bundesliga – Allemagne</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Bayern Munich – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Bayern Munich')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-img">
-          🟡<span class="badge new">Nouveau</span>
+      <!-- Brésil -->
+      <div class="bg-dark-card border border-dark-border rounded-lg overflow-hidden hover:-translate-y-1.5 hover:border-red transition-all duration-300 cursor-pointer">
+        <div class="relative bg-[#252525] h-56 flex items-center justify-center text-8xl">
+          🟡
+          <span class="absolute top-2 left-2 bg-green-700 text-white text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm">Nouveau</span>
         </div>
-        <div class="product-info">
-          <div class="product-league">Equipe nationale</div>
-          <div class="product-name">Brésil – Domicile</div>
-          <div class="product-footer">
-            <div class="product-price">12 000 <sub>FCFA</sub></div>
-            <button class="btn-order" onclick="commander('Brésil Domicile')">Ordre</button>
+        <div class="p-4">
+          <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Équipe nationale</div>
+          <div class="font-condensed font-bold text-lg uppercase tracking-wide mb-3">Brésil – Domicile</div>
+          <div class="flex items-center justify-between">
+            <div class="font-condensed font-black text-2xl">12 000 <span class="text-sm font-normal text-gray-500">FCFA</span></div>
+            <button onclick="commander('Brésil Domicile')" class="border border-red text-red hover:bg-red hover:text-white px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wide transition-colors">Ordre</button>
           </div>
         </div>
       </div>
@@ -615,70 +284,77 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <!-- ── DIVIDER ── -->
+  <div class="mx-8 h-px bg-gradient-to-r from-transparent via-dark-border to-transparent"></div>
 
-  <!-- POURQUOI -->
-  <section id="pourquoi">
-    <div class="section-label">Nos engagements</div>
-    <div class="section-title">Pourquoi <span>nous choisir</span></div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">🚀</div>
-        <h3>Livraison express</h3>
-        <p>Livraison dans tout Dakar en 24h. Livraison en régions disponible sous 48-72h.</p>
+  <!-- ── POURQUOI ── -->
+  <section id="pourquoi" class="bg-dark-bg px-8 py-20">
+    <div class="text-xs font-semibold text-red uppercase tracking-widest mb-2">Nos engagements</div>
+    <h2 class="font-condensed font-black text-5xl uppercase leading-none mb-12">
+      Pourquoi <span class="text-red">nous choisir</span>
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-dark-card border border-dark-border rounded-lg p-7 hover:border-red/50 transition-colors">
+        <div class="w-12 h-12 bg-red/10 border border-red/20 rounded-lg flex items-center justify-center text-2xl mb-5">🚀</div>
+        <h3 class="font-condensed font-bold text-lg uppercase tracking-wide mb-2">Livraison express</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Livraison dans tout Dakar en 24h. Livraison en régions disponible sous 48-72h.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">✅</div>
-        <h3>Qualité garantie</h3>
-        <p>Tous nos maillots sont inspectés avant expédition. Qualité AAA ou originaux authentiques.</p>
+      <div class="bg-dark-card border border-dark-border rounded-lg p-7 hover:border-red/50 transition-colors">
+        <div class="w-12 h-12 bg-red/10 border border-red/20 rounded-lg flex items-center justify-center text-2xl mb-5">✅</div>
+        <h3 class="font-condensed font-bold text-lg uppercase tracking-wide mb-2">Qualité garantie</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Tous nos maillots sont inspectés avant expédition. Qualité AAA ou originaux authentiques.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">💳</div>
-        <h3>Paiement flexible</h3>
-        <p>Paiement à la livraison, Wave, Orange Money — on s'adapte à toi.</p>
+      <div class="bg-dark-card border border-dark-border rounded-lg p-7 hover:border-red/50 transition-colors">
+        <div class="w-12 h-12 bg-red/10 border border-red/20 rounded-lg flex items-center justify-center text-2xl mb-5">💳</div>
+        <h3 class="font-condensed font-bold text-lg uppercase tracking-wide mb-2">Paiement flexible</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Paiement à la livraison, Wave, Orange Money — on s'adapte à toi.</p>
       </div>
-      <div class="why-card">
-        <div class="why-icon">🔄</div>
-        <h3>Échange facile</h3>
-        <p>Mauvaise taille ? On échange sous 48h sans complication. Satisfaction garantie.</p>
+      <div class="bg-dark-card border border-dark-border rounded-lg p-7 hover:border-red/50 transition-colors">
+        <div class="w-12 h-12 bg-red/10 border border-red/20 rounded-lg flex items-center justify-center text-2xl mb-5">🔄</div>
+        <h3 class="font-condensed font-bold text-lg uppercase tracking-wide mb-2">Échange facile</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Mauvaise taille ? On échange sous 48h sans complication. Satisfaction garantie.</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-box">
-      <div class="section-label">Commander maintenant</div>
-      <div class="section-title">Contacte-<span>nous</span></div>
-      <p>Envoie-nous un message pour passer commande, vérifier la disponibilité d'un maillot ou te renseigner sur les tailles. On répond rapidement !</p>
-      <div class="contact-grid">
-        <a href="https://wa.me/221786099646" class="contact-item" target="_blank">
-          <span class="ci-icon">💬</span>
-          <span class="ci-label">WhatsApp</span>
-          <span class="ci-value">+221 78 609 96 46</span>
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="bg-dark px-8 py-20">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="text-xs font-semibold text-red uppercase tracking-widest mb-2">Commander maintenant</div>
+      <h2 class="font-condensed font-black text-5xl uppercase leading-none mb-6">
+        Contacte-<span class="text-red">nous</span>
+      </h2>
+      <p class="text-gray-500 leading-relaxed mb-10">
+        Envoie-nous un message pour passer commande, vérifier la disponibilité d'un maillot ou te renseigner sur les tailles. On répond rapidement !
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <a href="https://wa.me/221786099646" target="_blank" class="bg-dark-card border border-dark-border hover:border-red rounded-lg p-5 flex flex-col items-center gap-2 text-gray-100 no-underline transition-all hover:-translate-y-1">
+          <span class="text-3xl">💬</span>
+          <span class="text-xs text-gray-500 uppercase tracking-widest">WhatsApp</span>
+          <span class="font-condensed font-bold text-lg">+221 78 609 96 46</span>
         </a>
-        <a href="https://instagram.com/ndakarou.jersey" class="contact-item" target="_blank">
-          <span class="ci-icon">📸</span>
-          <span class="ci-label">Instagram</span>
-          <span class="ci-value">@ndakarou.jersey</span>
+        <a href="https://instagram.com/ndakarou.jersey" target="_blank" class="bg-dark-card border border-dark-border hover:border-red rounded-lg p-5 flex flex-col items-center gap-2 text-gray-100 no-underline transition-all hover:-translate-y-1">
+          <span class="text-3xl">📸</span>
+          <span class="text-xs text-gray-500 uppercase tracking-widest">Instagram</span>
+          <span class="font-condensed font-bold text-lg">@ndakarou.jersey</span>
         </a>
-        <a href="mailto:contact@ndakarou-jersey.com" class="contact-item">
-          <span class="ci-icon">✉️</span>
-          <span class="ci-label">Email</span>
-          <span class="ci-value">contact@ndakarou-jersey.com</span>
+        <a href="mailto:contact@ndakarou-jersey.com" class="bg-dark-card border border-dark-border hover:border-red rounded-lg p-5 flex flex-col items-center gap-2 text-gray-100 no-underline transition-all hover:-translate-y-1">
+          <span class="text-3xl">✉️</span>
+          <span class="text-xs text-gray-500 uppercase tracking-widest">Email</span>
+          <span class="font-condensed font-bold text-lg">contact@ndakarou-jersey</span>
         </a>
       </div>
-      <a href="https://wa.me/221786099646" class="btn-primary" target="_blank" style="margin: 0 auto; width: fit-content;">
-        💬 Commander via WhatsApp &rarr;
+      <a href="https://wa.me/221786099646" target="_blank" class="inline-flex items-center gap-2 bg-red hover:bg-red-light text-white px-10 py-3 rounded font-semibold tracking-wide transition-all hover:-translate-y-0.5">
+        💬 Commander via WhatsApp →
       </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="logo" style="font-size:1.2rem;">Ndakarou<span style="color:var(--red)">.</span>Jersey</div>
-    <p>&copy; 2025 Ndakarou Jersey · Dakar, Sénégal · Tous droits réservés</p>
-    <p style="font-size:0.72rem; color: #555;">Site temporaire — version complète bientôt disponible</p>
+  <!-- ── FOOTER ── -->
+  <footer class="border-t border-dark-border px-8 py-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="font-condensed font-black text-xl text-white">Ndakarou<span class="text-red">.</span>Jersey</div>
+    <p class="text-xs text-gray-600">© 2025 Ndakarou Jersey · Dakar, Sénégal · Tous droits réservés</p>
+    <p class="text-xs text-gray-700">Site temporaire — version complète bientôt disponible</p>
   </footer>
 
   <script>
